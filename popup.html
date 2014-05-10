@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+<head>
+	<title>CultureAlley</title>
+	<link rel="stylesheet" href="css/ca_chrome_jquery-ui.css">
+	<script type="text/javascript" src="js/ca_chrome_jquery-1.9.1.min.js"></script>
+  	<script type="text/javascript" src="js/ca_chrome_jquery-ui.js"></script>
+	
+  	<link rel="stylesheet" type="text/css" href="css/ca_chrome_popup.css" />
+	
+</head>
+<body id='ca_popup_body'>
+	<div id='ca_header'>
+		<span style="font-size: 20px;">TRANSLATION</span>
+		
+			<div id="onOffButton" style="width:100px;position: relative;margin: auto;display: inline-table;margin-left: 70px;font-size:20px;cursor: pointer;background:#777;border-radius: 20px;">
+				<div id="can_translate_button" style="border-radius:20px;width:50px;height:50px;line-height:50px;background:#49C9AF;color:white;display:inline-block;float: left;text-align:center;">
+				ON
+				</div>
+				<div id="cannot_translate_button" style="border-radius:20px;width:50px;height:50px;line-height:50px;background:#FE5C57;color:white;display:inline-block;text-align:center;">
+				OFF
+				</div>
+				<div id="onOffToggleBlock" style="border-radius:20px;width:50px;height:50px;top: 0px;line-height:50px;position:absolute;background:#777;color:white;display:inline-block;text-align:center;">
+				ON
+				</div>
+			</div>
+		
+	</div>
+	
+	<div id='ca_container'>
+		
+		<div id='ca_learning_level' class='section'>
+			<span class='section_title'>Level</span> <br><br>
+			<div id='ca_level_slider'></div>
+			<table id='ca_level_indicators' style="color:white;">
+				<tr style="margin-top: -15px;position:absolute;">
+					<td align="left" style="position: absolute; "></td>
+					<td align="center" style="position: absolute; left: 75px;">|</td>
+					<td align="center" style="position: absolute; left: 150px;">|</td>
+					<td align="center" style="position: absolute; left: 225px;">|</td>
+					<td style="position: absolute; left: 303px;">|</td>
+				</tr>
+				<tr id='ca_text' style="line-height: 45px;">
+					<td align="left" style="position: absolute;">Beginner</td>
+					<td align="center" style="position: absolute; left: 66px;"></td>
+					<td align="center" style="position: absolute; left: 210px;"></td>
+					<td align="center" style="position: absolute; left: 169px;"></td>
+					<td align="right">Advanced</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div style="text-align: center;">
+			<button id='playGame' style="background:#F8CE46;color:#2b3e50;border:none;border-radius:40px;padding:20px;width:300px;font-weight:bolder;font-size: 18px;cursor: pointer;">PRACTICE WORDS LEARNT</button>
+		</div>
+		
+		<div id='ca_language' class='' style="position:absolute;background:#49c9af;color:#2b3e50;display:none;right:0px;bottom: 83px;padding: 30px;">
+			<span class='section_title'>Language Selection : </span> <br><br>
+			<div align="right">
+				<label for='ca_from_language'>Translating From :</label>
+				<select id='ca_from_language' name='ca_from_language'>
+					<option>--select--</option>
+					<option>English</option>
+					<!-- <option>Spanish</option> -->
+					<!-- <option>Mandarin</option> -->
+					<!-- <option>Hindi</option> -->
+				</select>
+			</div>
+			<div align="right">
+				<label for='ca_to_language'>To :</label>
+				<select id='ca_to_language' name='ca_to_language'>
+					<option>--select--</option>
+					<!-- <option>English</option> -->
+					<option>Spanish</option>
+					<!-- <option>Mandarin</option> -->
+					<!-- <option>Hindi</option> -->
+					<!-- <option>Gujarati</option> -->
+					<!--<option>Gujarati GRE</option>-->
+				</select>
+			</div>
+			<div id='ca_script_selection_div' align="right" style='display:none;'>
+				<label for='ca_script_selection'>Select Scripting :</label>
+				<select id='ca_script_selection' name='ca_script_selection'>
+					<option>--select--</option>
+					<option>PinYin</option>
+					<option>Simplified</option>
+				</select>
+			</div>
+			<div style="margin-top: 5px;text-align: right;display:none;">
+			<span>Reverse Translation :</span><input id="reverseTranslationId" type="checkbox" name="reverseTranslation" value="reverseTranslation">
+			</div>
+			
+		</div>
+		
+		<!--
+		<div id='ca_can_translate' class='section last_section' align="center" >
+			<span class='section_title'>Translation : </span> <br><br>
+			<button id='can_translate_button1' style="background:#49C9AF;color:white;">On</button>
+			<button id='cannot_translate_button1' style="background:#FE5C57;color:white;">Off</button>
+		</div>
+		-->
+		<div id="ca_footer">
+			<table class="footerTable" style="width:100%;background:rgba(255, 255, 255, 0.1);padding: 5px;cursor: pointer;">
+				<tr>
+					<td class="jarIcon"><img src="images/jar-small.png" ></td>
+					<td class="wordIcon"><img src="images/words.png"></td>
+					<td class="dayStrikeIcon"><img src="images/strike.png"></td>
+					<td class="settingIcon"><img src="images/settings.png"></td>
+				</tr>
+				<tr>
+				<td  class="jarIcon"><span class="jellyScore">0</span> Jellies</td>
+				<td class="wordIcon"><span class="wordScore">0</span> Words</td>
+				<td class="dayStrikeIcon"><span class="streakScore">1</span> Day Streak</td>
+				<td class="settingIcon">Settings</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="js/ca_chrome_popup.js"></script>
+</html>

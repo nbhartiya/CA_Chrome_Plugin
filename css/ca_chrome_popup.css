@@ -1,0 +1,109 @@
+@CHARSET "UTF-8";
+@font-face {
+  font-family: 'OpenSans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(https://themes.googleusercontent.com/static/fonts/opensans/v6/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+body, button, input, label, select, td, textarea,h1,h2,h3,h4,span,div,tr{
+font-family: 'OpenSans'!important;
+}
+#ca_popup_body {
+	width:430px;
+	height:343px;
+	background-color:#2b3e50;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	color:#2b3e50;
+	margin:0px;
+	padding:25px 0px 0px 0px;
+	border:none;
+
+}
+
+#ca_header {
+	margin:10px 0px 0px 0px!important;
+	/*text-align:center;*/
+	font-size:25px;
+	color:white;
+	text-align:center;
+}
+
+#ca_header, .section {
+	/*border-bottom: 1px solid rgba(255,255,255,0.5);*/
+	padding: 10px;
+	color:white;
+	margin:50px;
+}
+
+#ca_header a {
+	text-decoration: none;
+}
+
+#ca_container {
+	margin:0px 0px;
+}
+
+label {
+}
+
+.section_title {
+	font-size: 17px;
+	float:left;
+	text-transform:uppercase;
+	font-weight:lighter;
+
+}
+
+#ca_level_slider {
+	height: 1px;
+}
+
+#ca_level_slider .ui-slider-handle {
+	width: 1.5em;
+	height: 1.5em;
+	margin-left: -0.1em;
+	margin-top: -8px;
+	border-radius:100px;
+	background:#FE5C57;
+}
+
+#ca_level_slider .ui-widget-header {
+	background: #fe5c57;
+}
+
+#ca_level_indicators {
+	width: 100%;
+}
+
+#ca_level_indicators tr, #ca_level_indicators td {
+	padding: 0;
+	vertical-align: top;
+	margin: 0;
+}
+
+#ca_level_indicators #ca_text {
+	font-size: 14px;
+}
+
+#ca_can_translate button {
+	width: 49%;
+	height: 46px;
+	font-size: 17px;
+	border:none;
+	cursor:pointer;
+	
+}
+
+.last_section {
+	border-bottom: 0px;
+}
+
+.footerTable td{
+	width:25%;
+	text-align: center;
+	color:#F8CE46;
+}
+
+#ca_footer{
+margin-top: 50px;
+}

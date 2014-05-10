@@ -1,0 +1,86 @@
+@CHARSET "UTF-8";
+
+#ca_popup_body {
+	width:430px;
+	height:400px;
+	background-color:#2b3e50;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	color:#2b3e50;
+	margin:0px;
+	padding:50px 25px;
+	border:none;
+
+}
+
+#ca_header {
+	margin:10px 0px 0px 0px;
+	text-align:center;
+	font-size:25px;
+	color:white;
+}
+
+#ca_header, .section {
+	border-bottom: 1px solid rgba(255,255,255,0.5);
+	padding: 10px;
+}
+
+#ca_header a {
+	text-decoration: none;
+}
+
+#ca_container {
+	margin:5px 0px;
+}
+
+label {
+}
+
+.section_title {
+	font-size: 17px;
+	float:left;
+	text-transform:uppercase;
+	font-weight:lighter;
+
+	color:white;
+}
+
+#ca_level_slider {
+	height: 5px;
+}
+
+#ca_level_slider .ui-slider-handle {
+	width: 0.8em;
+	height: 0.8em;
+	margin-left: -0.1em;
+}
+
+#ca_level_slider .ui-widget-header {
+	background: #fe5c57;
+}
+
+#ca_level_indicators {
+	width: 100%;
+}
+
+#ca_level_indicators tr, #ca_level_indicators td {
+	padding: 0;
+	vertical-align: top;
+	margin: 0;
+}
+
+#ca_level_indicators #ca_text {
+	font-size: 14px;
+}
+
+#ca_can_translate button {
+	width: 49%;
+	height: 46px;
+	font-size: 17px;
+	border:none;
+	cursor:pointer;
+	
+}
+
+.last_section {
+	border-bottom: 0px;
+}
