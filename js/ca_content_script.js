@@ -84,6 +84,7 @@ function addBeforeLoginDataToUserData() {
 }
 
 function updateCurrentUserData() {
+	console.log("updateCurrentUserData");
 	var data = $('#currentUserData');
 	if($(data).attr('userid') != undefined && $(data).attr('email') != undefined) {
 		cultureAlleyUserData = {
@@ -114,6 +115,7 @@ function updateCurrentUserData() {
 };
 
 function initiateLoginIfRequested() {
+	console.log("initiateLoginIfRequested");
 	chrome.storage.sync.get('shouldLoginRequest', function(items) {
 		var shouldLoginRequest = items.shouldLoginRequest;
 		if(shouldLoginRequest != undefined && shouldLoginRequest.charAt(0) == '{') {
@@ -668,6 +670,7 @@ var setPopoverHTML = function() {
 	});
 	$("#ca_initiate_signup").click(function(event) {
 		addEventForAnalytics("Login", "check", "Redirected to Login", 1);
+		addDataForMixpanel("track","CESignUp","properties",1);
 		chrome.storage.sync.set({
 			shouldLoginRequest: '{"shouldLogin": true, "reqTime": ' + new Date().getTime() + '}'
 		}, function(items) {
@@ -921,6 +924,7 @@ var setPopoverFunctionalities = function() {
 		if(!$(this).hasClass("quizOptionDisable")){
 			if($(this).hasClass("correct_quiz_answer")) {
 				addEventForAnalytics("Learn", "click", "Quiz Popup: Answered Right", 1);
+				addDataForMixpanel("track","CEQuizRight","properties", 1);
 				$(this).css('background','#49c9af');
 				$( "#quiz_popover_text" ).text('GREAT JOB!');
 				$(".quizpopUpTick1").css("display","block");
@@ -939,6 +943,7 @@ var setPopoverFunctionalities = function() {
 		if(!$(this).hasClass("quizOptionDisable")){
 			if($(this).hasClass("correct_quiz_answer")) {
 				addEventForAnalytics("Learn", "click", "Quiz Popup: Answered Right", 1);
+				addDataForMixpanel("track","CEQuizRight","properties", 1);
 				$(this).css('background','#49c9af');
 				$( "#quiz_popover_text" ).text('GREAT JOB!');
 				$(".quizpopUpTick1").css("display","block");
@@ -957,6 +962,7 @@ var setPopoverFunctionalities = function() {
 		if(!$(this).hasClass("quizOptionDisable")){
 			if($(this).hasClass("correct_quiz_answer")) {
 				addEventForAnalytics("Learn", "click", "Quiz Popup: Answered Right", 1);
+				addDataForMixpanel("track","CEQuizRight","properties", 1);
 				$(this).css('background','#49c9af');
 				$( "#quiz_popover_text" ).text('GREAT JOB!');
 				$(".quizpopUpTick1").css("display","block");
@@ -1077,6 +1083,7 @@ var greenPopupSubmitted =  function() {
 	t = removeSpace(t);
 	if(meaning.toLowerCase() == t.toLowerCase()) {
 		addEventForAnalytics("Learn", "click", "Typing-Quiz Popup: Typed Correct", 1);
+		addDataForMixpanel("track","CEJellyWon","{}",1);
 		playQuizSound(true);
 
 		setTimeout(function() {
@@ -1273,6 +1280,7 @@ function showSignupPopup() {
 
 function hideSignupPopup() {
 	chrome.storage.sync.set({jelliesEarnedSinceLastSignupLaterClicked: '0'});
+	addDataForMixpanel("track","CESkipSignUp","properties",1);
 	$('#ca_signup_popover').css('display', 'none');
 	$('#ca_signup_popover_curtain').css('display', 'none');
 }
@@ -1541,6 +1549,17 @@ function addEventForAnalytics(category, action, opt_label, opt_value) {
 			opt_value: opt_value
 	};
 	chrome.runtime.sendMessage(request, function(r) {});
+}
+
+function addDataForMixpanel(action, name, properties, opt_value) {
+	var request = {
+			method: 'addDataForMixpanel',
+			action: action,
+			name: name,
+			properties: properties,
+			opt_value: opt_value
+	};
+	chrome.runtime.sendMessage(request, function(r) {});	
 }
 
 function setBadge(badgeText) {

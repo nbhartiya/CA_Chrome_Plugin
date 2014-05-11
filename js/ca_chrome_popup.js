@@ -224,6 +224,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			}, 500);
 			chrome.storage.sync.set({'isTranslationOn': true}, function() {
 				addEventForAnalytics("Preference Changes", "Click", "Translator: On", 1);
+				addDataForMixpanel("track","CEtransON","properties", 1);
 			});
 			isTranslationOn = true;
 			reloadTab();
@@ -326,6 +327,17 @@ function addEventForAnalytics(category, action, opt_label, opt_value) {
 			opt_value: opt_value
 	};
 	chrome.runtime.sendMessage(request, function(r) {});
+}
+
+function addDataForMixpanel(action, name, properties, opt_value) {
+	var request = {
+			method: 'addDataForMixpanel',
+			action: action,
+			name: name,
+			properties: properties,
+			opt_value: opt_value
+	};
+	chrome.runtime.sendMessage(request, function(r) {});	
 }
 
 function setBadge(badgeText) {
