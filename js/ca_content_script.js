@@ -110,6 +110,8 @@ function updateCurrentUserData() {
 			chrome.storage.sync.remove('shouldLoginRequest', function() {});
 			
 			addEventForAnalytics("Login", "check", "Logged In", 1);
+			//aliasing, to check and debug...
+			//addDataForMixpanel("alias",email,"{}",1);
 		});
 	}
 };
@@ -670,7 +672,7 @@ var setPopoverHTML = function() {
 	});
 	$("#ca_initiate_signup").click(function(event) {
 		addEventForAnalytics("Login", "check", "Redirected to Login", 1);
-		addDataForMixpanel("track","CESignUp","properties",1);
+		addDataForMixpanel("track","CESignUp","{}",1);
 		chrome.storage.sync.set({
 			shouldLoginRequest: '{"shouldLogin": true, "reqTime": ' + new Date().getTime() + '}'
 		}, function(items) {
@@ -767,6 +769,11 @@ var setPopoverFunctionalities = function() {
 		
 		if($(this).hasClass("redCandy")) {
 			addEventForAnalytics("Learn", "click", "Word: " + popover_displaying_element_detail.meaning, 1);
+			var property_hash ={};
+			property_hash['word_translated']=popover_displaying_element_detail.meaning.toLowerCase();
+			property_hash['word_original']=popover_displaying_element_detail.word.toLowerCase();
+			addDataForMixpanel("track","CEJellyClicked",property_hash, 1);
+
 			$('#quizPopup').css('display', 'none');
 			$('#typingQuizPopup').css('display', 'none');
 			
@@ -837,6 +844,10 @@ var setPopoverFunctionalities = function() {
 	$('.skipSpeak').click(function(event) {
 		$('#ca_popover').css('display', 'none');
 		$('#typingQuizPopup').css('display', 'none');
+		var property_hash ={};
+		property_hash['word_translated']=popover_displaying_element_detail.meaning.toLowerCase();
+		property_hash['word_original']=popover_displaying_element_detail.word.toLowerCase();
+		addDataForMixpanel("track","CEjellyListenNext",property_hash, 1);
 		
 		$(".replaced_word_to_popup").each(function(){
 			if($(this).text().toLowerCase().trim() == popover_displaying_element_detail.meaning.toLowerCase().trim()){
@@ -920,11 +931,13 @@ var setPopoverFunctionalities = function() {
 	});
 	
 	$(".quizWord1Text").click(function(evt) {
-
+		var property_hash ={};
+		property_hash['word_translated']=popover_displaying_element_detail.meaning.toLowerCase();
+		property_hash['word_original']=popover_displaying_element_detail.word.toLowerCase();
 		if(!$(this).hasClass("quizOptionDisable")){
 			if($(this).hasClass("correct_quiz_answer")) {
 				addEventForAnalytics("Learn", "click", "Quiz Popup: Answered Right", 1);
-				addDataForMixpanel("track","CEQuizRight","properties", 1);
+				addDataForMixpanel("track","CEQuizRight",property_hash, 1);
 				$(this).css('background','#49c9af');
 				$( "#quiz_popover_text" ).text('GREAT JOB!');
 				$(".quizpopUpTick1").css("display","block");
@@ -940,10 +953,13 @@ var setPopoverFunctionalities = function() {
 	});
 	
 	$(".quizWord2Text").click(function(evt) {
+		var property_hash ={};
+		property_hash['word_translated']=popover_displaying_element_detail.meaning.toLowerCase();
+		property_hash['word_original']=popover_displaying_element_detail.word.toLowerCase();
 		if(!$(this).hasClass("quizOptionDisable")){
 			if($(this).hasClass("correct_quiz_answer")) {
 				addEventForAnalytics("Learn", "click", "Quiz Popup: Answered Right", 1);
-				addDataForMixpanel("track","CEQuizRight","properties", 1);
+				addDataForMixpanel("track","CEQuizRight",property_hash, 1);
 				$(this).css('background','#49c9af');
 				$( "#quiz_popover_text" ).text('GREAT JOB!');
 				$(".quizpopUpTick1").css("display","block");
@@ -959,10 +975,13 @@ var setPopoverFunctionalities = function() {
 	});
 	
 	$(".quizWord3Text").click(function(evt) {
+		var property_hash ={};
+		property_hash['word_translated']=popover_displaying_element_detail.meaning.toLowerCase();
+		property_hash['word_original']=popover_displaying_element_detail.word.toLowerCase();
 		if(!$(this).hasClass("quizOptionDisable")){
 			if($(this).hasClass("correct_quiz_answer")) {
 				addEventForAnalytics("Learn", "click", "Quiz Popup: Answered Right", 1);
-				addDataForMixpanel("track","CEQuizRight","properties", 1);
+				addDataForMixpanel("track","CEQuizRight",property_hash, 1);
 				$(this).css('background','#49c9af');
 				$( "#quiz_popover_text" ).text('GREAT JOB!');
 				$(".quizpopUpTick1").css("display","block");
@@ -1083,7 +1102,10 @@ var greenPopupSubmitted =  function() {
 	t = removeSpace(t);
 	if(meaning.toLowerCase() == t.toLowerCase()) {
 		addEventForAnalytics("Learn", "click", "Typing-Quiz Popup: Typed Correct", 1);
-		addDataForMixpanel("track","CEJellyWon","{}",1);
+		var property_hash ={};
+		property_hash['word_translated']=t.toLowerCase();
+		property_hash['word_original']=popover_displaying_element_detail.word.toLowerCase();
+		addDataForMixpanel("track","CEJellyWon",property_hash,1);
 		playQuizSound(true);
 
 		setTimeout(function() {
@@ -1280,7 +1302,7 @@ function showSignupPopup() {
 
 function hideSignupPopup() {
 	chrome.storage.sync.set({jelliesEarnedSinceLastSignupLaterClicked: '0'});
-	addDataForMixpanel("track","CESkipSignUp","properties",1);
+	addDataForMixpanel("track","CESkipSignUp","{}",1);
 	$('#ca_signup_popover').css('display', 'none');
 	$('#ca_signup_popover_curtain').css('display', 'none');
 }
@@ -1312,6 +1334,11 @@ function updateJelliesInUI() {
 
 	$('.scorePoint').text(totalJellies);
 	setBadge(totalJellies);
+	var super_property_hash = {};
+	super_property_hash["jellyCount"]=totalJellies;
+	addDataForMixpanel("register",name,super_property_hash,1);
+	addDataForMixpanel("people",name,super_property_hash,1);
+
 }
 
 function getEarnedCandies(from , to) {

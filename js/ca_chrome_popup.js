@@ -103,9 +103,12 @@ var attachSlider = 	function() {
 				$('#ca_level_slider .ui-slider-handle').css('margin-left', '-0.1em');
 			}
 			var value = ui.value;
-			chrome.storage.sync.set({'learning_level': value}, function() {
+			var property_hash ={};
+			property_hash['newLevel']=value;
+			chrome.storage.sync.set({"learning_level": value}, function() {
 			    LEARNING_LEVEL = value;
 			    addEventForAnalytics("Preference Changes", "Slide", "Learning Level: " + value, 1);
+			    addDataForMixpanel("track","CElevelChanged",property_hash, 1);
 			    reloadTab();
 			});
 		}
@@ -224,7 +227,9 @@ document.addEventListener('DOMContentLoaded', function () {
 			}, 500);
 			chrome.storage.sync.set({'isTranslationOn': true}, function() {
 				addEventForAnalytics("Preference Changes", "Click", "Translator: On", 1);
-				addDataForMixpanel("track","CEtransON","properties", 1);
+				addDataForMixpanel("track","CEtransON","{}", 1);
+				//on off people property
+				//addDataForMixpanel("register","name","{'On_Off':'On'}");
 			});
 			isTranslationOn = true;
 			reloadTab();
@@ -237,6 +242,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			chrome.storage.sync.set({'isTranslationOn': false}, function() {
 				isTranslationOn = false;
 				addEventForAnalytics("Preference Changes", "Click", "Translator: Off", 1);
+				addDataForMixpanel("track","CEtransOFF","{}", 1);
 			});
 			reloadTab();
 		}
@@ -257,6 +263,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	$(".settingIcon").click(function(evt){
 		$("#ca_language").toggle();
 		evt.stopPropagation();
+		addDataForMixpanel("track","CEftrSettings","{}", 1);
 	});
 	
 	$("#ca_popup_body ,#ca_container").click(function(evt){
@@ -353,4 +360,5 @@ $(function(){
 			//	$('#ca_signup_popover').css('display', 'none');
 			});
 	});
+	addDataForMixpanel("track","CEplayGames","{}", 1);
 });
